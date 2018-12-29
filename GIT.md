@@ -368,9 +368,9 @@ Notes:  The symbols ^ and ~ can be combined
 With git, you can reference files with all wildcard symbols (such as * or .) used in terminal. (See shell regex)
 
 ```
-$ # the wildcard * means all files
+# the wildcard * means all files
 $ git add * 
-$ # tells git to do the add function to all files
+# tells git to do the add function to all files
 ```
 
 **Referencing branch**
@@ -409,7 +409,7 @@ Because the command to track and stage files is the same, when you use <code>git
 
 <img src="add and staging.png">
 
-This is why previously we have always executed git add -A before commiting, where -A means all changes.
+This is why previously we have always executed <code>git add .</code> before commiting, where the period (.)  means all changes in the current folder (and subfolders).
 
 
 
@@ -451,11 +451,11 @@ You can tell git to ignore some files by listing them in a file called .gitignor
 ```
 # .gitignore file
 # Not allowed to use tabs before the file name
-gui/*           # ignore all files from gui folder
+gui/\*          # ignore all files from gui folder
 !gui/gui.txt    # except for the file gui/gui.txt
 
 temp.txt        # ignore a file called temp.txt
-```
+````
 Similarly in the .gitignore, you can tell git not to ignore some patterns using “!”.
 If you want git to ignore an already tracked file, you will have to untrack the file first.
 
@@ -494,11 +494,11 @@ There are several git commands that allow you to undo changes both individually 
 
 Git clean removes all untracked files excluding the files listed in .gitignore. This is good to remove the files you have added since the previous commit.
 
-There are several options you can use with git clean:
-    -n This is a dryrun, you can see what files will be deleted without actually removing any files
-    -x remove files included from gitignore in addition to the untracked files
-    -X remove only files from gitignore
-    -f force clean if git refuses to clean the untracked files
+There are several options you can use with git clean:  
+    -n This is a dryrun, you can see what files will be deleted without actually removing any files  
+    -x remove files included from gitignore in addition to the untracked files  
+    -X remove only files from gitignore  
+    -f force clean if git refuses to clean the untracked files  
 
 For example, if you had an untracked file named subtractionTester:
 ```
