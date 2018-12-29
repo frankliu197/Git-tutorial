@@ -179,7 +179,7 @@ By checking out different branches, you can edit different states of your progra
 
 ## Detached HEAD
 We have reviewed that the HEAD variable represents the state of code that you are currently working on, however, the HEAD variable does not have to be a branch.
-You also checkout a commit using <code>git checkout <commit></code>. This is called the detached HEAD state. This can be used to check or edit code in a certain commit. (see how to reference a commit in the next section)
+You also checkout a commit using <code>git checkout \<commit\></code>. This is called the detached HEAD state. This can be used to check or edit code in a certain commit. (see how to reference a commit in the next section)
 <img src="detached HEAD graph.png">
 In the detached state, you can commit, and it will look like such. But once you leave the detached HEAD state, you will need to create a branch or the commits are lost.
 <img src="detached HEAD after commit graph.png">
@@ -347,7 +347,7 @@ If you want to see the commit graph of your project, use the following command.
 
 
 ## Referencing
-Various commands require parameters, as shown with the angled brackets (<>) throughout the tutorial. For example, <commit> would require a commit parameter. You can use one of the listed methods to pass a parameter.
+Various commands require parameters, as shown with the angled brackets (<>) throughout the tutorial. For example, \<commit\> would require a commit parameter. You can use one of the listed methods to pass a parameter.
 
 **Referencing commits**
 The easiest ways to reference a commit are:
@@ -402,13 +402,10 @@ Staging is used so you can choose which changes to save in a certain commit.
 
 <img src="commit with staging.png">
 **Working with tracking and staging**
-By default, a file is untracked, and all changes are unstaged. So when you first create a file, any changes made to the file is not recognized by git. To let git track your file, you need to run <code>git add <file></code>. With a tracked file, when you make changes to the file, the changes are unstaged. To stage the changes for a commit, use the command: <code>git add <file></code>.
+By default, a file is untracked, and all changes are unstaged. So when you first create a file, any changes made to the file is not recognized by git. To let git track your file, you need to run <code>git add \<file\></code>. With a tracked file, when you make changes to the file, the changes are unstaged. To stage the changes for a commit, use the command: <code>git add Nfile></code>.
 
-Thus the command to both track a file and to stage all changes in a file is:
-```
-git add <file>
-```
-Because the command to track and stage files is the same, when you use <code>git add <file></code> on an untracked file, the file will both be tracked and its contents will be staged.
+Thus the command to both track a file and to stage all changes in a file is: <code>git add \<file\></code>
+Because the command to track and stage files is the same, when you use <code>git add \<file\></code> on an untracked file, the file will both be tracked and its contents will be staged.
 
 <img src="add and staging.png">
 
@@ -438,17 +435,18 @@ Untracked files:
 ```
 
 In git status, a file can appear in both the staged and unstaged section.
-When you use git add <file>, all changes that were done up to the moment the command was executed are staged. All future changes to the file will be unstaged until you run git add <file> again.
+When you use <code>git add \<file\></code>, all changes that were done up to the moment the command was executed are staged. All future changes to the file will be unstaged until you run <code> git add <file> </code> again.
 
 <img src="staging while editing.png">
 
-If you want to unstage all changes in a file from the last commit, use <code>git reset HEAD <file></code>. You can unstage all changes from all files using using <code>git reset HEAD</code>.
+If you want to unstage all changes in a file from the last commit, use <code>git reset HEAD \<file\></code>. You can unstage all changes from all files using using <code>git reset HEAD</code>.
 
-To untrack a tracked file use <code>git remove –cache <file></code>.
+To untrack a tracked file use <code>git remove –cache \<file\></code>.
 
 <img src="staging states.png">
 
 **Git Ignore**
+
 You can tell git to ignore some files by listing them in a file called .gitignore. These files will not be tracked, and they will not be included in commands with the all modifier (e.g. git add -A). The .gitignore file is not created by default, and it is a good idea to add it to the base folder of your git repository.
 ```
 # .gitignore file
@@ -459,12 +457,10 @@ gui/*           # ignore all files from gui folder
 temp.txt        # ignore a file called temp.txt
 ```
 Similarly in the .gitignore, you can tell git not to ignore some patterns using “!”.
-
-Git ignore
-
 If you want git to ignore an already tracked file, you will have to untrack the file first.
 
 **Git keep**
+
 By default git only tracks files. Therefore all folders are untracked unless the folder contains a tracked file. Thus if you really want to commit a folder without a tracked file, it is a common practise to create a tracked file called *.gitkeep* inside the folder.
 
 ## Check change history
@@ -472,9 +468,8 @@ You can check your change history to your project using git diff.
 By default git diff shows you all unstaged changes; it tells you what has not been added for commiting. Here are some modifiers you can use with git diff:
 --staged Shows you all your the staged changes instead
 
-git diff <commit> shows you all changes done to the git repository since the given commit.
-Thus you can see all staged and unstaged changes together since your last commit with:
-git diff HEAD
+<code>git diff \<commit\></code> shows you all changes done to the git repository since the given commit.
+Thus you can see all staged and unstaged changes together since your last commit with: <code>git diff HEAD</code>
 
 ```
 $ git diff HEAD
@@ -532,14 +527,15 @@ Git reset moves back the HEAD branch to reference the specified commit. The comm
 <img src="reset graph.png">
 
 There are three different ways you can use git reset: (will make a table for this)
-- <code> git reset --soft <commit> </code> -> the affected changes will be staged and ready to commit
-- <code> git reset --mixed <commit> # default modifier </code> -> all changes will be unstaged
-- <code> git reset --hard <commit> </code> -> all changes are lost and cannot be undone
+- <code> git reset --soft \<commit\> </code> -> the affected changes will be staged and ready to commit
+- <code> git reset --mixed \<commit\> # default modifier </code> -> all changes will be unstaged
+- <code> git reset --hard \<commit\> </code> -> all changes are lost and cannot be undone
 <img src="reset states.png">
 You can remove unwanted changes from the last commit using git reset –hard HEAD.
 
 
 **git revert**
+
 Git revert will undo changes from any previous commit, and creates a new commit with the changes undoed.
 ```
 $ git revert <commit>
