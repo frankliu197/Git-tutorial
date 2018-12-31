@@ -39,7 +39,7 @@ $ git init
 ```
 
 # Committing
-Whenever you *commit* with git, you save the current state of your code. A commit is represented with a circle on the commit graph. 
+A *commit* is the technical term for taking a snapshot of your code; that is, git will save the current state of your project. In the commit graph, each of the circles represent a commit. 
 
 Let's say the developer has finished coding the "addition functionality" of the project through coding a file called *addition.txt*. To save or commit the changes to the project, including the changes to *addition.txt*, use:  
 (Remember that all lines starting with a **#** are comments)
@@ -50,33 +50,34 @@ $ git add .
 $ git commit -m "Coded addition.txt"
 ```
 The first command, <code>git add .</code>, will be explained in Staging; for now, treat it as a mandatory command to execute before <code>git commit</code>. <code>git commit</code> will take a snapshot of your current code with your custom commit name, which in this case is *Coded addition.txt*, resulting in the first commit on the commit graph.
+
 <img src="addition graph.png" alt="Coded addition.txt commit graph">
   
-After you commit, you will see a message similar to the following:
+[//]: <> (After you commit, you will see a message similar to the following:)
 ```
 [master (root-commit) f88cfc7] Coded addition.txt
  1 file changed, 2 insertions(+)
  create mode 100644 addition.txt
 ```
-On the bottom line(s), you can see which files git has saved on this commit.
+This is the message you get when you have a successful commit. On the bottom line(s), you can see which files git has saved on this commit.
 
-You can tell if you have successfully committed by checking the bottom line(s). For example, if you commit without making any changes:
-````
+Sometimes, you find yourself using the <code>git commit</code> again without committing nothing new, you will get the following message:
+```
 $ git add .
 $ git commit -m "No Changes Made"
 On branch master
 nothing to commit, working directory clean
 ```
-Git has not commit any files. Therefore, this commit has not been made and the commit graph has not been changed.
 
-Now let's try commiting again:
+
+However, this is not to say that you cannot commit after you have already committed once. Assume the developer has decided to commit again after coding the file *subtraction.txt*.
 ```
-# Assume developer has finished coding the subtraction functionality
 $ git add .
 $ git commit -m “Coded subtraction.txt”
 ```
 <img src="subtraction graph.png" alt="Coded subtraction.txt commit graph">
-Remember that each commit is a saved state of your project. Therefore the commits "Coded addition.txt" and "Coded substraction.txt" represents different states of your project. 
+Each consecutive commit will have a reference to the previous commit(s), represented with an arrow in the figure above.
+
 
 Another common mistake is that you commit too early and forget to commit some other changes. To recommit the changes with the last commit you did, use the commits <code>--amend</code> option.
 
@@ -89,17 +90,16 @@ $ git commit --amend
  1 file changed, 2 insertions(+)
  create mode 100644 subtraction.txt
 ```
-The <code>--amend</code> modification saves your work in the same way a normal commit would, but using <code>--amend</code> provides several benifits.
+The <code>--amend</code> modification saves your work in the same way a normal commit would, however, using <code>--amend</code> will reduce the complexity of the git commit graph. This allows for more efficient git operations as you will see in the future.
 <img src="amend graph.png" alt="--amend commit vs a normal commit">
-While commits "Coded addition.txt" and "Coded subtraction.txt" represent the same state of code, using <code>--amend</code> will reduce the complexity of the commit graph. This allows for more efficient git operations as you will see in the future.
 
 # BRANCH Workflow and HEAD
-Branches and HEAD are pointers that is used to organize the commit graph. Adding on these pointers to the commit graph, it would look like the following:  
+Branches and HEAD are pointers that is used to organize the commit graph. Adding on these pointers to the commit graph, it would look like the following.
 <img src="HEAD and master.png" alt="A complete commit graph with branches and HEAD"> 
 
 ## Branch Workflow
-A branch is a pointer to a commit. When you start your git project, you are given a default branch called *master*. You can learn how branches work in the *Effectively using Branches* section.  
-To show how branches work, lets first create a new branch: 
+A branch is a pointer to a commit. When you start your git project, you are given a default branch called *master*. You can learn how branches work in the *Effectively using Branches* section.
+To show how branches work, lets first create a new branch:
 ```
 # git branch <branch_name>
 $ git branch GUI      
@@ -115,22 +115,21 @@ $ git branch
 ```
 The asterisks (\*) by master means that *HEAD* is pointing the master. The variable *HEAD* is used to keep track of which branch you are currently on. This is required as many git operations are done relative to *HEAD*.
 
-**Vocabulary:**
+Vocabulary: 
+
 The branch your HEAD is pointing to is referred to as the *HEAD branch* and the commit is HEAD is pointing to is referred as the *HEAD commit*.
 
-When we commit, only the HEAD branch is affected: The HEAD branch moves forwards with your new commit and the other branches remain unchanged. If the HEAD branch is master and we create a commit with the name "Coded multiplication.txt", the following git graph will emerge.   
+For example, when we commit only the HEAD branch is affected: The HEAD branch moves forwards with your new commit and the other branches remain unchanged. If the HEAD branch is master and we create a commit with the name "Coded multiplication.txt", the following git graph will emerge. 
 <img src="multiplication graph.png" alt="commiting while on the master branch">
-Now the master and GUI branch point to different commits, or different states of your code. 
 
-Instead, we were to commit with the GUI branch instead, only the GUI branch will move forwards.  
-<img src="gui pt 1.png" alt="commiting with the GUI branch">  
-In this graph, the commits will diverge. In this case, the code in either branches are independent from each other: as in if you change a file in one branch, the files in other branches do not change. 
+Now branch master and branch GUI will point to different commits.
 
-If you were to code the division operator on the master branch, and commit, the code in the GUI branch is uneffected.
-showing image later.
+If we were to commit with the GUI branch instead, only the GUI branch will move fowards.
+<img src="Coded GUI pt 1.png" alt="commiting with the GUI branch">
 
-**Switching between branches**
-You can switch between branches using the command:
+Here is a special pattern though. There is now multiple branches of commits. The workplace of the commits in both branches are different and are now completely independent from each other: as in if you change a file in one branch, the files in other branches do not change.
+
+To switch between branches using the command:
 ```
 Git checkout <branch>
 ```
@@ -138,7 +137,6 @@ Git checkout <branch>
 
 Switching to a branch is often referred as *checking out* a branch.
 
-**Deleting branches**
 Branches can be delted using:
 ```
 Git branch -d <branch>
@@ -146,13 +144,17 @@ Git branch -d <branch>
 Deleting branches is dangerous can result in a loss of work, especially if you have multiple lines of commits. For example, if the GUI branch was deleted, the commits can no longer be referenced and therefore they will be deleted. 
 <img src="delete GUI graph.png" alt="">
 
-Remember when you delete a branch, you are only deleting the branch pointer. The commits that are deleted is a result of deleting this pointer.
+Remember when you delete a branch, you are only deleting the branch pointer. The commits that are deleted is a direct result of deleting this pointer.
 
 You can safely delete a branch as long as another branch can reference the commits.
 <img src="delete GUI graph2.png">
 
+**Clarification**
+
+Remember that a branch is only a pointer. Although one of the functions of branches is to allow for commits in parallel, when we say delete a branch, we are only deleting the pointer.
+
 ## Workspace when working with branching
-Recall that each commit contain different states of code. As we can see the workplace in master and GUI contain the following files.
+Recall that each commit contain different states of code. For example the GUI and master commits may contain the following files.
 ```
 # On GUI
 $ ls -1
@@ -173,7 +175,14 @@ addition.txt (master version)
 multiplication.txt (master version)
 subtraction.txt (master version)
 ``` 
-By checking out different branches, you can edit different states of your program simultanously. 
+By checking out different branches, you can edit different states of your program simultanously. For example we can work on the master branch without affecting the code state in the GUI branch and work on the GUI branch without affecting the master branch.
+
+## Detached HEAD
+We have reviewed that the HEAD variable represents the state of code that you are currently working on, however, the HEAD variable does not have to be a branch.
+You also checkout a commit using <code>git checkout \<commit\></code>. This is called the detached HEAD state. This can be used to check or edit code in a certain commit. (see how to reference a commit in the next section)  
+<img src="detached HEAD graph.png">  
+In the detached state, you can commit, and it will look like such. But once you leave the detached HEAD state, you will need to create a branch or the commits are lost.  
+<img src="detached HEAD after commit graph.png">
 
 ## How to effectively use branches
 Branches are used for two main reasons:
@@ -262,7 +271,7 @@ Fast-forward
 ```
 <img src="merge Math graph.png">
 
-**Merging multiple branches of commits**  
+**Merging multiple branches of commits**
 Git will create a new snapshot that results in this merge and moves the branch pointer forward. This commit is called a merge commit and is special in that it has two parents.
 
 ```
@@ -302,26 +311,17 @@ Not as commonly used, but Git has another merging function called git rebase. Gi
 **Aborting Merge**
 
 If you have merge conflicts and would no longer want to deal with the merge conflicts, use one of the following two commands (depending on which merge algorithm you use).
-```
-git merge -abort
-git rebase –abort
-```
-
-## Detached HEAD
-You do not need to always checkout a branch. You can also checkout a commit using <code>git checkout \<commit\></code>. This is called the detached HEAD state. This can be used to check or edit code in a certain commit. (see how to reference a commit in the next section)  
-<img src="detached HEAD graph.png">  
-In the detached state, you can commit, and it will look like such. But once you leave the detached HEAD state, you will need to create a branch or the commits are lost.  
-<img src="detached HEAD after commit graph.png">
-
+<code>git merge -abort
+git rebase –abort</code>
 
 
 ## Viewing commit history
 You can check your commit history using the git log command.
 By default, git log lists the commits made in that repository in reverse chronological order.
 For each commit, you can see the commit ID, the the author’s name and email, the date written, and the commit message. The commit ID will look longer than the commit ID that was shown as you commited your program, even though they are the same, as you do not need the whole ID to uniquely identify a commit.
-There are several options you can use with git log:   
-    --reverse show the commit history in chronological order (instead of reverse chronological order)   
-    -p Shows the changes introduced in each commits   
+There are several options you can use with git log:
+    --reverse show the commit history in chronological order (instead of reverse chronological order)
+    -p Shows the changes introduced in each commits
 
 ```
 $ git log
@@ -341,26 +341,27 @@ Date:   Mon Nov 19 16:58:12 2018 -0500
 # next few lines of output are cut
 ```
 
-If you want to see the commit graph of your project, use <code>git log --all --decorate --oneline –graph</code>
+If you want to see the commit graph of your project, use the following command.
+  git log --all --decorate --oneline –graph
 
 
 
 ## Referencing
 Various commands require parameters, as shown with the angled brackets (<>) throughout the tutorial. For example, \<commit\> would require a commit parameter. You can use one of the listed methods to pass a parameter.
 
-**Referencing commits**   
+**Referencing commits**
 The easiest ways to reference a commit are:
 - Using the commit Id (as shown in git log)
 - HEAD (for the current commit only)
 In most cases, you can also use a branch, since a branch is a reference to a commit. However, this is not true if the command performs different actions when given a branch and commit parameter (such as in the case of <code>git checkout</code>).
 <img src="referencing commits.png">
 
-Every commit can be also represented with some sort of combination relative to HEAD
+Every commit can be represented with some sort of combination relative to HEAD
 - HEAD~#, where # represents the number of commits up the hierarchy, via the first commit if there is more than one commit
-- HEAD^#, goes up one commit, relative to the # parent if there is more than one commit  
-Notes:  The symbols ^ and ~ can be combined   
-        You do not need to write # if # is 1 (e.g. HEAD\~1 is the same as HEAD\~)  
-<img src="HEAD graph.png">  
+- HEAD^#, goes up one commit, relative to the # parent if there is more than one commit
+Notes:  The symbols ^ and ~ can be combined
+        You do not need to write # if # is 1 (e.g. HEAD\~1 is the same as HEAD\~)
+<img src="HEAD graph.png">
 
 **Referencing files**
 
@@ -400,13 +401,17 @@ Unstaged changes are changes where git will not save on the next commit, and wil
 Staging is used so you can choose which changes to save in a certain commit.
 
 <img src="commit with staging.png">
-**Working with tracking and staging**     
-By default, a file is untracked, and all changes are unstaged. So when you first create a file, any changes made to the file is not recognized by git. 
-The command to both track and stage a file is <code>git add \<file\></code>.
-Whenever you execute <code>git add</code> on a file, it will track the file (if it hasn't been tracked) and stage its contents.
+**Working with tracking and staging**
+By default, a file is untracked, and all changes are unstaged. So when you first create a file, any changes made to the file is not recognized by git. To let git track your file, you need to run <code>git add \<file\></code>. With a tracked file, when you make changes to the file, the changes are unstaged. To stage the changes for a commit, use the command: <code>git add Nfile></code>.
 
-<img src="add and staging.png">    
+Thus the command to both track a file and to stage all changes in a file is: <code>git add \<file\></code>
+Because the command to track and stage files is the same, when you use <code>git add \<file\></code> on an untracked file, the file will both be tracked and its contents will be staged.
+
+<img src="add and staging.png">
+
 This is why previously we have always executed <code>git add .</code> before commiting, where the period (.)  means all changes in the current folder (and subfolders).
+
+
 
 You can see what is staged, unstaged and untracked using git status. There is also a -s modifier to give you a condensed output.
 ```
@@ -429,7 +434,8 @@ Untracked files:
   gui.txt
 ```
 
-In git status, a file can appear in both the staged and unstaged section. This is because when you use <code>git add \<file\></code>, the files contents at that moment are  staged. All subsequent changes to the file will be unstaged until you run <code> git add \<file\> </code> again.
+In git status, a file can appear in both the staged and unstaged section.
+When you use <code>git add \<file\></code>, all changes that were done up to the moment the command was executed are staged. All future changes to the file will be unstaged until you run <code> git add <file> </code> again.
 
 <img src="staging while editing.png">
 
@@ -441,27 +447,29 @@ To untrack a tracked file use <code>git remove –cache \<file\></code>.
 
 **Git Ignore**
 
-You can tell git to ignore some files by listing them in a file called *.gitignore*. These files will be ignored from git operations such as <code>git add</code> unless specified otherwise. The *.gitignore* file is not created by default, and it is a good idea to add it to the base folder of your git repository.
+You can tell git to ignore some files by listing them in a file called .gitignore. These files will not be tracked, and they will not be included in commands with the all modifier (e.g. git add -A). The .gitignore file is not created by default, and it is a good idea to add it to the base folder of your git repository.
 ```
 # .gitignore file
 # Not allowed to use tabs before the file name
+gui/\*          # ignore all files from gui folder
+!gui/gui.txt    # except for the file gui/gui.txt
 
-# You can list files normally or with terminal regex
 temp.txt        # ignore a file called temp.txt
-gui/*           # ignore all files from gui folder
-!gui/gui.txt    # except for the file gui/gui.txt (the exclamation mark is the negate operator for gitignore)
-```
+````
+Similarly in the .gitignore, you can tell git not to ignore some patterns using “!”.
 If you want git to ignore an already tracked file, you will have to untrack the file first.
 
-**Git keep**  
-By default git only tracks files. Therefore all folders are untracked unless the folder contains a tracked file. THus if you need to track a folder, you will need to add a tracked file in the folder. It is a common practise name this file  *.gitkeep*.
+**Git keep**
 
-## Check change history  
-You can check your change history to your project using <code>git diff</code>.
-By default <code>git diff</code> shows you all unstaged changes; it tells you what has not been added for commiting. You can use the <code>--staged</code> modifier to show the staged changes instead.
+By default git only tracks files. Therefore all folders are untracked unless the folder contains a tracked file. Thus if you really want to commit a folder without a tracked file, it is a common practise to create a tracked file called *.gitkeep* inside the folder.
 
-YOu can also use <code>git diff \<commit\></code> to show all changes done to the git repository since the given commit.  
-Thus you can see all staged and unstaged changes together since your last commit with: <code>git diff HEAD</code>  
+## Check change history
+You can check your change history to your project using git diff.
+By default git diff shows you all unstaged changes; it tells you what has not been added for commiting. Here are some modifiers you can use with git diff:
+--staged Shows you all your the staged changes instead
+
+<code>git diff \<commit\></code> shows you all changes done to the git repository since the given commit.
+Thus you can see all staged and unstaged changes together since your last commit with: <code>git diff HEAD</code>
 
 ```
 $ git diff HEAD
@@ -498,16 +506,18 @@ $ git clean
 Removing subtractionTester.txt
 ```
 
-**Git checkout:**
+**git checkout**
 
 Normally the checkout command is for changing the HEAD pointer. However you can also use the command:
 <code>git checkout \<commit\> -- \<file\></code>, to get specific versions of a file from another commit (including from other branches).
 
-Checkout is commonly used to undo all changes to a file since the last commit.
+For example, (show an example by getting a file from another branch)/
 
-For example, the following command undoes all changes from files in the bin directory since the most rececnt commit.
+Checkout is commonly used to undo all changes to a file since the last commit using:
 ```
-$ git checkout HEAD – bin/* 
+$ git checkout HEAD -- <file>
+# For example:
+# git checkout HEAD – bin/* undoes all changes from files in the bin directory.
 ```
 The files changed by git checkout are automatically staged.
 
@@ -516,13 +526,14 @@ Git reset moves back the HEAD branch to reference the specified commit. The comm
 
 <img src="reset graph.png">
 
-There are three different ways you can use <code> git reset \<commit\> </code>:  
+There are three different ways you can use <code> git reset <commit> </code>:  
 <img src="reset options.png">  
 <img src="reset states.png">
-For example, you can remove unwanted changes from the last commit using <code>git reset –hard HEAD</code>.
+For example, you can remove unwanted changes from the last commit using git reset –hard HEAD.
 
 
-**git revert**  
+**git revert**
+
 Git revert will undo changes from any previous commit, and creates a new commit with the changes undoed.
 ```
 $ git revert <commit>
