@@ -38,8 +38,13 @@ $ mkdir Calculator && cd Calculator
 $ git init
 ```
 
+Summary:
+```
+Create a new repository: git init
+```
+
 # Committing
-Whenever you *commit* with git, you save the current state of your code. A commit is represented with a circle on the commit graph. 
+Whenever you *commit* with git, you save the current state of your code.  
 
 Let's say the developer has finished coding the "addition functionality" of the project through coding a file called *addition.txt*. To save or commit the changes to the project, including the changes to *addition.txt*, use:  
 (Remember that all lines starting with a **#** are comments)
@@ -48,37 +53,30 @@ Let's say the developer has finished coding the "addition functionality" of the 
 # and: git commit -m "<message>"
 $ git add .
 $ git commit -m "Coded addition.txt"
-```
-The first command, <code>git add .</code>, will be explained in Staging; for now, treat it as a mandatory command to execute before <code>git commit</code>. <code>git commit</code> will take a snapshot of your current code with your custom commit name, which in this case is *Coded addition.txt*, resulting in the first commit on the commit graph.
-<img src="addition graph.png" alt="Coded addition.txt commit graph">
-  
-After you commit, you will see a message similar to the following:
-```
 [master (root-commit) f88cfc7] Coded addition.txt
  1 file changed, 2 insertions(+)
  create mode 100644 addition.txt
 ```
-On the bottom line(s), you can see which files git has saved on this commit.
+The first command, <code>git add .</code>, will be explained in Staging; for now, treat it as a mandatory command to execute before <code>git commit</code>. <code>git commit</code> will take a snapshot of your current code with your custom commit name, which in this case is *Coded addition.txt*, resulting in the first commit on the commit graph.
+<img src="addition graph.png" alt="Coded addition.txt commit graph">
+The commit is represented in a circle in the graph above. It is best to think of the commit as a saved state of your project.
 
-You can tell if you have successfully committed by checking the bottom line(s). For example, if you commit without making any changes:
-````
-$ git add .
-$ git commit -m "No Changes Made"
-On branch master
-nothing to commit, working directory clean
-```
-Git has not commit any files. Therefore, this commit has not been made and the commit graph has not been changed.
+Now if you were to continue programming on your project, you would have different files in your current workspace than with the most recent commit as show in the figure below.
+<img src="after addition graph.png">
 
-Now let's try commiting again:
+To save those new changes, you will need to commit again.
 ```
-# Assume developer has finished coding the subtraction functionality
 $ git add .
 $ git commit -m “Coded subtraction.txt”
+[master 99f2b6a] Coded subtraction.txt
+ Date: Mon Nov 19 16:46:00 2018 -0500
+ 1 file changed, 2 insertions(+)
+ create mode 100644 subtraction.txt
 ```
 <img src="subtraction graph.png" alt="Coded subtraction.txt commit graph">
 Remember that each commit is a saved state of your project. Therefore the commits "Coded addition.txt" and "Coded substraction.txt" represents different states of your project. 
 
-Another common mistake is that you commit too early and forget to commit some other changes. To recommit the changes with the last commit you did, use the commits <code>--amend</code> option.
+Often, you may commit too early and forget to commit some other changes. To recommit the changes with the last commit you did, use the commits <code>--amend</code> option.
 
 For example, if the developer has decided to recode *subtraction.txt*, he/she will execute the following commands:
 ```
@@ -92,6 +90,20 @@ $ git commit --amend
 The <code>--amend</code> modification saves your work in the same way a normal commit would, but using <code>--amend</code> provides several benifits.
 <img src="amend graph.png" alt="--amend commit vs a normal commit">
 While commits "Coded addition.txt" and "Coded subtraction.txt" represent the same state of code, using <code>--amend</code> will reduce the complexity of the commit graph. This allows for more efficient git operations as you will see in the future.
+
+Another common mistake you may make is to commit nothing.
+```
+$ git add .
+$ git commit -m "No Changes Made"
+On branch master
+nothing to commit, working directory clean
+```
+Fortunately in this case git will not create a new commit as there is "nothing to commit". Your commit graph will remain the same.
+
+```
+To commit: git commit -m "<message>"
+To recommit your last commit: git commit --amend
+```
 
 # BRANCH Workflow and HEAD
 Branches and HEAD are pointers that is used to organize the commit graph. Adding on these pointers to the commit graph, it would look like the following:  
@@ -236,7 +248,8 @@ However, if the code had been coded in two files with different names, there wou
 ## MERGING BRANCHES
 When you merge, you use the command:
 ```
-git merge <branch> <branch2> <branch3> ….
+$ git merge <branch> [branch2] [branch3]
+# where square brackets [] represent optional parameters
 ```
 This merges the given branches with the HEAD branch (given that you are not in an detached HEAD state).
 
@@ -303,8 +316,8 @@ Not as commonly used, but Git has another merging function called git rebase. Gi
 
 If you have merge conflicts and would no longer want to deal with the merge conflicts, use one of the following two commands (depending on which merge algorithm you use).
 ```
-git merge -abort
-git rebase –abort
+git merge --abort
+git rebase --abort
 ```
 
 ## Detached HEAD
@@ -313,26 +326,36 @@ You do not need to always checkout a branch. You can also checkout a commit usin
 In the detached state, you can commit, and it will look like such. But once you leave the detached HEAD state, you will need to create a branch or the commits are lost.  
 <img src="detached HEAD after commit graph.png">
 
-
+Summary:
+```
+List branches: git branch
+Create branch: git branch <branch>
+Delete branch: git branch -d <branch>
+Checkout a state of your code: git checkout <branch/commit>
+Merge branch with HEAD branch: git merge <branch1> [branch2] [branch3] [etc...]
+Rebase branch with HEAD branch: git rebase <branch>
+See merge conflicts: git status
+Abort merge/rebase: git merge/abort <branch>
+```
 
 ## Viewing commit history
 You can check your commit history using the git log command.
 By default, git log lists the commits made in that repository in reverse chronological order.
-For each commit, you can see the commit ID, the the author’s name and email, the date written, and the commit message. The commit ID will look longer than the commit ID that was shown as you commited your program, even though they are the same, as you do not need the whole ID to uniquely identify a commit.
-There are several options you can use with git log:   
+For each commit, you can see the commit ID, the the author’s name and email, the date written, and the commit message. There are several options you can use with git log:   
     --reverse show the commit history in chronological order (instead of reverse chronological order)   
     -p Shows the changes introduced in each commits   
+    --online Displays a commit in one line
 
 ```
 $ git log
-commit 0adc831ee0c111fa9c95b29383cf5cff3677494f
+commit 0adc831ee0c111fa9c95b29383cf5cff3677494f     #Commit ID shown here
 Merge: b75dc55 91b994c
 Author: frankliu197 <frankliu197@gmail.com>
 Date:   Mon Nov 19 17:06:29 2018 -0500
 
     Merge branch 'GUI'
 
-commit 91b994c9a138726f8c861b9cb1947bc6eddb8f3d
+commit 91b994c9a138726f8c861b9cb1947bc6eddb8f3d      
 Author: frankliu197 <frankliu197@gmail.com>
 Date:   Mon Nov 19 16:58:12 2018 -0500
 
@@ -340,15 +363,43 @@ Date:   Mon Nov 19 16:58:12 2018 -0500
 
 # next few lines of output are cut
 ```
+With the <code>--oneline</code> parameter, you will only see a tiny portion of the commit ID instead. These two values are identical as you do not need the whole ID to uniquely identify a commit.
+```
+$ git log --oneline
+0adc83 Merge branch 'GUI'
+91b994 Coded GUI pt.2
+# next few lines of output are cut
+```
+Thus the commit id *0adc83* from "Merge branch 'GUI'" will be complete equivalent to *0adc831ee0c111fa9c95b29383cf5cff3677494f*. The commit ID will be important in the next section. 
 
 If you want to see the commit graph of your project, use <code>git log --all --decorate --oneline –graph</code>
 
-
+Summary:
+```
+View commits: git log
+  -p Shows changes introduced in each commit
+  --reverse Shows the commit history in reverse order
+  --oneline Displays each commit in one line
+View commit graph: git log --all --decorate --oneline --graph
+```
 
 ## Referencing
-Various commands require parameters, as shown with the angled brackets (<>) throughout the tutorial. For example, \<commit\> would require a commit parameter. You can use one of the listed methods to pass a parameter.
+**Conventions**  
+Various commands require parameters, as shown with angled brackets \<\> or square brackets [] throughout the tutorial.  
+In this tutorial different representation of parameters mean:
+\<param\> - Represents a mandatory parameter
+   e.g. <code> git checkout \<commit\> </code>
+\[param\] - Represents an optional parameter 
+\[param=?] - If no param is given, the parameter will have a default value of *?*
+  e.g. <code> git reset \[file=.\] </code>
+  In this case option will have a default value of *.* if no option parameter is given, where a period in shell regex represents this dictory (And everything inside the directory)
+\[param|default=value] - If no param is given, the default action is given with *value* (But this value is NOT a proper argument to the command)
+  e.g. <code> git reset [file|default=all] </code>, would mean the same as  <code> git reset \[file=.\] </code>
 
-**Referencing commits**   
+
+You can use one of the listed methods to pass a parameter.
+
+**Commit Parameters**   
 The easiest ways to reference a commit are:
 - Using the commit Id (as shown in git log)
 - HEAD (for the current commit only)
@@ -362,21 +413,19 @@ Notes:  The symbols ^ and ~ can be combined
         You do not need to write # if # is 1 (e.g. HEAD\~1 is the same as HEAD\~)  
 <img src="HEAD graph.png">  
 
-**Referencing files**
+**File Parameters**
 
-With git, you can reference files with all wildcard symbols (such as * or .) used in terminal. (See shell regex)
+With git, you can reference files with the normal symbols used in terminal (such as * or .). (See shell regex)
 
 ```
-# the wildcard * means all files
+# the wildcard * means all files, and . means this directory (along with the files in this directory)
 $ git add * 
+$ git add . 
 # tells git to do the add function to all files
 ```
 
-**Referencing branch**
-
+**Branch Parameters**
 You can reference a branch only with the branch name. You cannot use the variable HEAD as HEAD is a pointer to your current workspace and is not a branch.
-
-
 
 ## Tracking and Staging:
 Git gives various states to files/changes in your git repository.
@@ -433,7 +482,7 @@ In git status, a file can appear in both the staged and unstaged section. This i
 
 <img src="staging while editing.png">
 
-If you want to unstage all changes in a file from the last commit, use <code>git reset HEAD \<file\></code>. You can unstage all changes from all files using using <code>git reset HEAD</code>.
+If you want to unstage all changes in a file from the last commit, use <code>git reset HEAD [file=all]</code>. You can unstage all changes from all files using using <code>git reset HEAD</code>.
 
 To untrack a tracked file use <code>git remove –cache \<file\></code>.
 
@@ -456,12 +505,23 @@ If you want git to ignore an already tracked file, you will have to untrack the 
 **Git keep**  
 By default git only tracks files. Therefore all folders are untracked unless the folder contains a tracked file. THus if you need to track a folder, you will need to add a tracked file in the folder. It is a common practise name this file  *.gitkeep*.
 
+Summary:
+```
+To track and stage a file: git add <file>
+To unstage a file: git reset HEAD [file=.]
+To untrack a file: git remove --cache <file>
+To see staged, unstaged and untracked files: git status [-s]
+To ignore a file: Place a reference to the file in .gitignore
+To track a folder with no tracked files: Create tracked file in that folder and call it .gitkeep
+```
+
 ## Check change history  
 You can check your change history to your project using <code>git diff</code>.
-By default <code>git diff</code> shows you all unstaged changes; it tells you what has not been added for commiting. You can use the <code>--staged</code> modifier to show the staged changes instead.
 
-YOu can also use <code>git diff \<commit\></code> to show all changes done to the git repository since the given commit.  
-Thus you can see all staged and unstaged changes together since your last commit with: <code>git diff HEAD</code>  
+git diff [--unstaged] Shows you all unstaged changes since last commit
+git diff --staged Shows all changes staged changes since last commit
+git diff \<commit\> Show all changes done to the git repository since the given commit.  
+  Thus you can see all staged and unstaged changes together since your last commit with: <code>git diff HEAD</code>  
 
 ```
 $ git diff HEAD
@@ -478,6 +538,22 @@ index 6fe99a7..e548684 100644
 ```
 
 <img src="diff states.png">
+
+You can also show the difference between any two branches or commits
+git diff \<branch1\>..\<branch2\> 
+git diff \<commit1\> \<commit2\>
+
+Summary:
+```
+Check the change history of your project relative to your current workspace:
+git diff [--unstaged]
+git diff --staged
+git diff <commit>
+
+Check the difference between two branches or commits:
+git diff \<branch1\>..\<branch2\> 
+git diff \<commit1\> \<commit2\>
+```
 
 ## Undoing Changes
 There are several git commands that allow you to undo changes both individually or as a whole.
@@ -530,6 +606,21 @@ $ git revert <commit>
 <img src="revert graph.png"> 
 This is different from reset in that it can undo any one commit without undoing the more recent commits. As well it does not remove any commits so it is easily revertable.
 
+Summary:
+```
+Remove all untracked (but not ignored files): git clean
+    -n show files will be deleted without actually removing any files  
+    -x remove files included from gitignore in addition to the untracked files  
+    -X remove only files from gitignore  
+    -f force clean  
+Checkout a file from another commit: git checkout \<commit\> -- \<file\>
+Undo changes to the given commit: git reset [default=--mixed] <commit>
+  --soft all affected changes are staged
+  --mixed all affected changes are unstaged
+  --hard all affected changes are deleted
+Create a new commit undoing changes from any previous commit: git revert <commit>
+```
+
 **Remotes**
     As you work on code, you must share your changes with other people To share code online, you will use use Remotes. Remotes are pointers to online repositories, such as Github, Gitlab and Heroku. We will use Github.
 After first creating a repository on github, we can set up an online repository with the git repository with the following command:
@@ -562,16 +653,70 @@ git remote rename <old_remote> <new_remote>
 Or you can delete the remote with:
 git remote rm <remote>
 
+Summary:
+```
+Clone a repo: git clone <URL>
+Fetch updates: git fetch <remote> [branch|default=all]
+Fetch and merge updates: git fetch <remote> [branch|default=all]
+Push updates: git push <remote> <branch>
+Push all branches: git push --all <remote> 
+Add remote: git remote add <remote_name> <URL>
+List remotes: git remote -v
+Remove remote: git remote rm <remote>
+Re-set remote URL: git remote set-url <remote> <new_URL>
+Show remote details: git remote show <remote>
+Rename remote: git remote rename <old_remote_name> <new_remote_name>
+```
+
 Remote branches (need to test later)
     What are they
     How to use them
     merging them
     --tracking/automerge
+
+Summary:
+```
+List remote branches: git branch -a
+Delete remote branch: git push origin --delete <remote_branch>
+```
 https://git-scm.com/book/id/v2/Git-Branching-Remote-Branches
 
 Stashing
 
+Often, when you’ve been working on part of your project, things are in a messy state and you want to switch branches for a bit to work on something else. The problem is, you don’t want to do a commit of half-done work just so you can get back to this point later. The answer to this issue is the git stash command.
+allows you to apply work done in one brranch to another
+
+Summary:
+```
+Add to stash (-u for include untracked files): git stash save [-u] "<message>"
+Show stash list: git stash list
+Apply stash: git stash apply@{#}
+Delete stash: git stash drop@{#}
+```
+source: https://medium.freecodecamp.org/useful-tricks-you-might-not-know-about-git-stash-e8a9490f0a1a
+
 Tagging
+list tags: git tag -l [search term]
+lgihtweight tag similar to branch
+git tag <tag> [commit]
+annotated tag
+git tag -a <tag_name> -m "<message>" [commit] (adds information you get from commit)
+git show <tag>
+git push <remote> <tag> (similar to branch) or --tag for all tags
+git tag -d <tag>
+git checkout <Tag>
+rename git tag new old && git tag -d <tag> (
+itags ncluding merge)
+
+
+Summary:
+```
+List tages: git tag -l [search term]
+Create lightweight tag: git tag <tag>
+Create annotated tag: git tag -a <tag>
+Show tag information: git show <tag>
+Delete tag: git tag -d <tag>
+```
 
 Conclusion
 Throughout this guide you have learnt both basic git usage as well as some more advanced git functions, which is much more than enough to code most projects. If there is any command you do not quite understand, you can use the following command:
@@ -582,11 +727,15 @@ Now that you know how to use git, it is a good idea to check out what you can do
 
 
 
-coming soon
-STASHING https://www.atlassian.com/git/tutorials/saving-changes/git-stash
-https://medium.freecodecamp.org/useful-tricks-you-might-not-know-about-git-stash-e8a9490f0a1a
 
 TAGGING
 
 CherryPicking
 
+https://www.previousnext.com.au/blog/intro-cherry-picking-git
+Sometimes you don't want to merge a whole branch into another, and only need to pick one or two specific commits. This process is called 'cherry picking'.
+```
+Cherry-pick commit(s) to HEAD branch: git cherry-pick <commit1> [commit2] [commit3] ...
+Finish cherry-picking after resolving the conflicts: git cherry-pick --continue
+Abort cherry-pick: git cherry-pick --abort
+```
