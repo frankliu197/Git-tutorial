@@ -61,7 +61,8 @@ The first command, <code>git add .</code>, will be explained in Staging; for now
 <img src="addition graph.png" alt="Coded addition.txt commit graph">
 The commit is represented in a circle in the graph above. It is best to think of the commit as a saved state of your project.
 
-Now if you were to continue programming on your project, you would have different files in your current workspace than with the most recent commit as show in the figure below.
+After you finish commiting, you can continue to edit your project. If you continue to edit the project, the current  state of the project will be different from the state saved in your most recent commit.
+Say you have now finished coding *subtraction.txt*. The state of your current project and the state of your commit are different as shown below.
 <img src="after addition graph.png">
 
 To save those new changes, you will need to commit again.
