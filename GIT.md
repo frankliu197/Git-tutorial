@@ -139,9 +139,9 @@ Instead, you were to commit with the GUI branch instead, only the GUI branch wil
 <img src="gui pt 1.png" alt="commiting with the GUI branch">  
 In this graph, the commits will diverge. In this case, the code in either branches are independent from each other: as in if you change a file in one branch, the files in other branches do not change. 
 
-If you were to code the division operator on the master branch, and commit, the code in the GUI branch is uneffected.
-showing image later.
-
+And just like before, if you were to code in a branch, the code in other branches remains unaffected. 
+<img src="independent commits.png">
+Remember that each time you commit, you add new state of your project onto the commit graph. Thus state of the commits "Coded Multiplication" and "Coded GUI pt 1" remains the same as well.
 **Switching between branches**
 You can switch between branches using the command:
 ```
