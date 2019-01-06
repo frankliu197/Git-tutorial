@@ -32,7 +32,7 @@ $ git init
 ```
 You can use the git init command on any project that has not yet been initialized with git. You can tell if a project has been initialized if it contains the *.git* folder. A project that uses git will be called a *git repository* from now on.
 
-So for the calculator program as shown above, the developer would have to execute the following commands:
+So for the calculator program as shown above, the you would have to execute the following commands:
 ```    
 $ mkdir Calculator && cd Calculator
 $ git init
@@ -46,7 +46,7 @@ Create a new repository: git init
 # Committing
 Whenever you *commit* with git, you save the current state of your code.  
 
-Let's say the developer has finished coding the "addition functionality" of the project through coding a file called *addition.txt*. To save or commit the changes to the project, including the changes to *addition.txt*, use:  
+Let's say when coding the calculator project, you have coded a called *addition.txt* which contains the addition functionality of the calculator. To save or commit the changes to the project, including the changes to *addition.txt*, use:  
 (Remember that all lines starting with a **#** are comments)
 ```
 # Commands are: git add .
@@ -61,8 +61,8 @@ The first command, <code>git add .</code>, will be explained in Staging; for now
 <img src="addition graph.png" alt="Coded addition.txt commit graph">
 The commit is represented in a circle in the graph above. It is best to think of the commit as a saved state of your project.
 
-After you finish commiting, you can continue to edit your project. If you continue to edit the project, the current  state of the project will be different from the state saved in your most recent commit.
-Say you have now finished coding *subtraction.txt*. The state of your current project and the state of your commit are different as shown below.
+After you finish commiting, you can continue to edit your project. If you continue to edit the project, the current state of the project will be different from the state saved in your most recent commit.
+Say you have then coded  *subtraction.txt*. The state of your current project and the state of your commit are different as shown below.
 <img src="after addition graph.png">
 
 To save those new changes, you will need to commit again.
@@ -79,7 +79,7 @@ Remember that each commit is a saved state of your project. Therefore the commit
 
 Often, you may commit too early and forget to commit some other changes. To recommit the changes with the last commit you did, use the commits <code>--amend</code> option.
 
-For example, if the developer has decided to recode *subtraction.txt*, he/she will execute the following commands:
+For example, if you decided to recode *subtraction.txt*, you can recommit using the <code>--amend</code> option.
 ```
 $ git add .
 $ git commit --amend
@@ -88,7 +88,7 @@ $ git commit --amend
  1 file changed, 2 insertions(+)
  create mode 100644 subtraction.txt
 ```
-The <code>--amend</code> modification saves your work in the same way a normal commit would, but using <code>--amend</code> provides several benifits.
+The <code>--amend</code> modification saves your work in the same way a normal commit would, but provides several benefits over a normal commit.
 <img src="amend graph.png" alt="--amend commit vs a normal commit">
 While commits "Coded addition.txt" and "Coded subtraction.txt" represent the same state of code, using <code>--amend</code> will reduce the complexity of the commit graph. This allows for more efficient git operations as you will see in the future.
 
@@ -135,7 +135,7 @@ When we commit, only the HEAD branch is affected: The HEAD branch moves forwards
 <img src="multiplication graph.png" alt="commiting while on the master branch">
 Now the master and GUI branch point to different commits, or different states of your code. 
 
-Instead, we were to commit with the GUI branch instead, only the GUI branch will move forwards.  
+Instead, you were to commit with the GUI branch instead, only the GUI branch will move forwards.  
 <img src="gui pt 1.png" alt="commiting with the GUI branch">  
 In this graph, the commits will diverge. In this case, the code in either branches are independent from each other: as in if you change a file in one branch, the files in other branches do not change. 
 
