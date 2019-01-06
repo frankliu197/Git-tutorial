@@ -10,9 +10,10 @@ If you have been programming for some time, you certainly would have heard about
 - Reverting your code to a previous states if something goes wrong
 - Multiple developers can work on ONE project without interfering with each other
 
-This tutorial will concisely explain the usage of the common (as well as the not so common) git commands on the Linux terminal. An example project that we will use git to code is a calcualtor, where its changes can be visualized as the following:  
+This tutorial will concisely explain the usage of the common (as well as the not so common) git commands on the Linux terminal. 
+The example project that we will code with git is a calculator and its changes can be visualized as such:
 <img src="calculator graph.png" alt="Calculator Commit Graph">  
-This type of graph is often referred to as a *commit graph*. A *commit graph* will be used throughout the tutorial to help you visualize and understand what git does internally after every command.
+This type of graph is often referred to as a *commit graph*. These commit graphs will be explained in further detail throughout the tutorial.
 
 
 # Table of contents:
