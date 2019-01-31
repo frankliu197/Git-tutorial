@@ -2,7 +2,7 @@
 <h1> How to use git </h1>
 
 NOTE: THIS IS IN BETA   
-This will not reflect my true writing skills. Check out https://github.com/frankliu197/Linux-Tutorial for my true abilities
+This will not reflect my true writing skills. Check out https://github.com/frankliu197/Linux-Tutorial to see completed (and how i truly) write technical articles
 ## Prerequisite knowledge:
 * Basic Terminal Commands and Usage (Tutorial Here)
 * Understanding of basic programming concepts (such as Variables and Pointers) 
