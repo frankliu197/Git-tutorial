@@ -1,6 +1,8 @@
 
 <h1> How to use git </h1>
 
+NOTE: THIS IS IN BETA   
+This will not reflect my true writing skills. Check out https://github.com/frankliu197/Linux-Tutorial for my true abilities
 ## Prerequisite knowledge:
 * Basic Terminal Commands and Usage (Tutorial Here)
 * Understanding of basic programming concepts (such as Variables and Pointers) 
@@ -95,7 +97,7 @@ $ git commit --amend
 ```
 The <code>--amend</code> modification saves your work in the same way a normal commit would, but provides several benefits over a normal commit.
 <img src="amend graph.png" alt="--amend commit vs a normal commit">
-While commits "Coded addition.txt" and "Coded subtraction.txt" represent the same state of code, using <code>--amend</code> will reduce the complexity
+While the commits "Coded addition.txt" and "Coded subtraction.txt" represent the same state of code, using <code>--amend</code> will reduce the complexity
 of the commit graph. This allows for more efficient git operations as you will see in the future.
 
 Another common mistake you may make is to commit nothing.
@@ -288,7 +290,6 @@ Fast-forward
  create mode 100644 multiplication.txt
 ```
 <img src="merge Math graph.png">
-Fast-forward merge is two 
 
 **Merging multiple branches of commits**  
 Git will create a new snapshot that results in this merge and moves the branch pointer forward. This commit is called a merge commit and is special in that it has two parents.
@@ -694,74 +695,19 @@ Show remote details: git remote show <remote>
 Rename remote: git remote rename <old_remote_name> <new_remote_name>
 ```
 
-Remote branches (need to test later)
-    What are they
-    How to use them
-    merging them
-    --tracking/automerge
+
+To be written later
+Remote branches
 
 Summary:
 ```
 List remote branches: git branch -a
 Delete remote branch: git push origin --delete <remote_branch>
 ```
-https://git-scm.com/book/id/v2/Git-Branching-Remote-Branches
+
+Tagging
+
 
 Stashing
 
-Often, when you’ve been working on part of your project, things are in a messy state and you want to switch branches for a bit to work on something else. The problem is, you don’t want to do a commit of half-done work just so you can get back to this point later. The answer to this issue is the git stash command.
-allows you to apply work done in one brranch to another
-
-Summary:
-```
-Add to stash (-u for include untracked files): git stash save [-u] "<message>"
-Show stash list: git stash list
-Apply stash: git stash apply@{#}
-Delete stash: git stash drop@{#}
-```
-source: https://medium.freecodecamp.org/useful-tricks-you-might-not-know-about-git-stash-e8a9490f0a1a
-
-Tagging
-list tags: git tag -l [search term]
-lgihtweight tag similar to branch
-git tag <tag> [commit]
-annotated tag
-git tag -a <tag_name> -m "<message>" [commit] (adds information you get from commit)
-git show <tag>
-git push <remote> <tag> (similar to branch) or --tag for all tags
-git tag -d <tag>
-git checkout <Tag>
-rename git tag new old && git tag -d <tag> (
-itags ncluding merge)
-
-
-Summary:
-```
-List tages: git tag -l [search term]
-Create lightweight tag: git tag <tag>
-Create annotated tag: git tag -a <tag>
-Show tag information: git show <tag>
-Delete tag: git tag -d <tag>
-```
-
-Conclusion
-Throughout this guide you have learnt both basic git usage as well as some more advanced git functions, which is much more than enough to code most projects. If there is any command you do not quite understand, you can use the following command:
-git help <action>
-There will be a cheat sheet coming soon.
-
-Now that you know how to use git, it is a good idea to check out what you can do with git on the web, such as push and pull requests and continuous integration!
-
-
-
-
-TAGGING
-
-CherryPicking
-
-https://www.previousnext.com.au/blog/intro-cherry-picking-git
-Sometimes you don't want to merge a whole branch into another, and only need to pick one or two specific commits. This process is called 'cherry picking'.
-```
-Cherry-pick commit(s) to HEAD branch: git cherry-pick <commit1> [commit2] [commit3] ...
-Finish cherry-picking after resolving the conflicts: git cherry-pick --continue
-Abort cherry-pick: git cherry-pick --abort
-```
+Cherrypicking
