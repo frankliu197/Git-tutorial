@@ -577,8 +577,8 @@ git diff --staged
 git diff <commit>
 
 Check the difference between two branches or commits:
-git diff \<branch1\>..\<branch2\> 
-git diff \<commit1\> \<commit2\>
+git diff <branch1>..<branch2> 
+git diff <commit1> <commit2>
 ```
 
 ## Undoing Changes
@@ -611,7 +611,7 @@ For example, the following command undoes all changes from files in the bin dire
 ```
 $ git checkout HEAD – bin/* 
 ```
-The files changed by git checkout are automatically staged.
+The files changed by git checkout are automatically staged.  
 
 **git reset**
 Git reset moves back the HEAD branch to reference the specified commit. The commits between the previous HEAD commit and the specified commit are lost, 
@@ -631,7 +631,7 @@ Git revert will undo changes from any previous commit, and creates a new commit 
 $ git revert <commit>
 ```
 <img src="revert graph.png"> 
-This is different from reset in that it can undo any one commit without undoing the more recent commits. As well it does not remove any commits so it is easily revertable.
+This is different from reset in that it can undo any one commit without undoing the more recent commits. As well it does not remove any commits so it is easily revertable.  
 
 Summary:
 ```
@@ -648,39 +648,46 @@ Undo changes to the given commit: git reset [default=--mixed] <commit>
 Create a new commit undoing changes from any previous commit: git revert <commit>
 ```
 
-**Remotes**
-    As you work on code, you must share your changes with other people To share code online, you will use use Remotes. Remotes are pointers to online repositories, such as Github, Gitlab and Heroku. We will use Github.
-After first creating a repository on github, we can set up an online repository with the git repository with the following command:
-    git remote add <name_of_remote> <repository URL>
-    e.g. git remote add origin https://github.com/A/Calculator
-In this case, our remote is called origin and our repository URL github.com/A/Calculator. Typically the name of your main remote is called Origin. Now to post your code onto your remote, use the command:
-    git push <remote> <branch>
-    e.g. git push origin master
-    So if this project was coded by two people and developer A has started the project, developer B has no access to the code. After all the code is in developer’s A local hard drive. To share this code, A has to pushed his code to the repository, so B can download and start editing the project.
-    For B to download the project, the following commands are used
-    git clone <URL>
-    git clone https://github.com/A/Calculator
-This will create a new git project on your local computer inside a new folder called Calculator, and then copy all the code in that repository. Since git clone DOWNLOADS the whole project from the repository into a new folder, you will only use git clone the first time you download the project. After that, if you want to receive the latest changes from online you will use one of the following:
-    git fetch <remote>
-    git pull <remote>
-git fetch will update your changes into a new branch, and git pull will auto merge the code in the repository with your branches. In other words, git fetch = git pull + git merge.
-    Thus whenever whenever a new version of code is pushed into origin, the commands: git fetch/pull origin are needed to download it.
+## Remotes  
+As you work on code, you must share your changes with other people To share code online, you will use use Remotes. Remotes are pointers to online repositories, such as Github, Gitlab and Heroku. We will use Github.  
+After first creating a repository on github, we can set up an online repository with the git repository with the following command:  
+```
+$ git remote add <name_of_remote> <repository URL>
+e.g. git remote add origin https://github.com/A/Calculator
+```
+In this case, our remote is called origin and our repository URL github.com/A/Calculator. Typically the name of your main remote is called Origin. Now to post your code onto your remote, use the command:   
+```
+$ git push <remote> <branch>
+e.g. git push origin master
+```
+So if this project was coded by two people and developer A has started the project, developer B has no access to the code. After all the code is in developer’s A local hard drive. To share this code, A has to pushed his code to the repository, so B can download and start editing the project.  
+For B to download the project, the following commands are used:  
+```
+$ git clone <URL>
+e.g. git clone https://github.com/A/Calculator
+```
 
-Working simultaneously:
-    With remotes, it is much easier for two people on same version of the project at once. It seems counterproductive for two people to code the same aspect of project at once, but if the people work on separate parts of the project and use git merge lots of progress can be done. For example if developer A worked on the Math aspect and developerB worked on the GUI aspect separately, they will be able to merge thier work perfectly without any conflicts.
+This will create a new git project on your local computer inside a new folder called Calculator, and then copy all the code in that repository. Since git clone DOWNLOADS the whole project from the repository into a new folder, you will only use git clone the first time you download the project. After that, if you want to receive the latest changes from online you will use one of the following:  
+`$ git fetch <remote>`  
+`$ git pull <remote>`
 
-Managing Remotes:
-The location of the remotes are stored in the .git folder. So after the repository has been set by one person, it does not have to be set again. You can check all the set remotes using:
-    remote -v
 
-You can reset the name of the url or rename the remote using:
-git remote set-url <remote> <new_URL>
-git remote rename <old_remote> <new_remote>
+```git fetch``` will update your changes into a new branch, and git pull will auto merge the code in the repository with your branches. In other words, ```git fetch = git pull + git merge```. Thus whenever whenever a new version of code is pushed into origin, the commands: git fetch/pull origin are needed to download it.  
 
-Or you can delete the remote with:
-git remote rm <remote>
+With remotes, it is much easier for two people on same version of the project at once. It seems counterproductive for two people to code the same aspect of project at once, but if the people work on separate parts of the project and use git merge lots of progress can be done. For example if developer A worked on the Math aspect and developerB worked on the GUI aspect separately, they will be able to merge thier work perfectly without any conflicts.  
 
-Summary:
+**Managing Remotes:**  
+The location of the remotes are stored in the `.git` folder. So after the repository has been set by one person, it does not have to be set again. You can check all the set remotes using:  
+```$ remote -v```
+
+You can reset the name of the url or rename the remote using:  
+```$ git remote set-url <remote> <new_URL>```
+```$ git remote rename <old_remote> <new_remote>```
+
+Or you can delete the remote with:  
+```$ git remote rm <remote>```  
+
+**Summary:**
 ```
 Clone a repo: git clone <URL>
 Fetch updates: git fetch <remote> [branch|default=all]
